@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import HomePage from './pages/homepage/HomePage.component';
 import ShopPage from './pages/shop/shop.component';
@@ -14,13 +14,18 @@ import { connect } from 'react-redux';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { checkUserSession } from './redux/user/user.actions';
 
-
-class App extends React.Component {
-  unsuscbribeFromAuth = null;
-
-  componentDidMount() {
-    const { checkUserSession } = this.props;
+const App = ({ checkUserSession, currentUser }) => {
+  useEffect(() => {
     checkUserSession();
+  }, [checkUserSession]);
+
+
+// class App extends React.Component {
+  // unsuscbribeFromAuth = null;
+
+  // componentDidMount() {
+  //   const { checkUserSession } = this.props;
+  //   checkUserSession();
     // const { setCurrentUser } = this.props;
 
     // this.unsuscbribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -38,13 +43,15 @@ class App extends React.Component {
     //   setCurrentUser(userAuth);
       // addCollectionAndDocuments('collections', collectionArray.map(({title, items}) => ({title, items})));
     // });
-  }
+  // }
   
-  componentWillUnmount(){
-    this.unsuscbribeFromAuth();
-  }
+  // componentWillUnmount(){
+  //   this.unsuscbribeFromAuth();
+  // }
 
-  render() {
+
+
+  // render() {
   return (
     <div>
       <Header />
@@ -67,7 +74,7 @@ class App extends React.Component {
     </div>
   );
 }
-}
+// }
 
 const mpaStatetoProps = createStructuredSelector({
   currentUser: selectCurrentUser

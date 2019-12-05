@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 // import { createStructuredSelector } from 'reselect';
@@ -21,16 +21,16 @@ import CollectionPageContainer from '../collection/collection.container';
 // const CollectionPageWithSpinner = WithSpinner(CollectionPage);
 
 
-class ShopPage extends React.Component {
+// class ShopPage extends React.Component {
     // state = {
     //     loading: true
     // };
 
     // unsubscribeFromSnapshot = null;
 
-    componentDidMount() {
-        const { fetchCollectionsStart } = this.props;
-            fetchCollectionsStart();
+    // componentDidMount() {
+    //     const { fetchCollectionsStart } = this.props;
+    //         fetchCollectionsStart();
         // const { updatedCollections } = this.props;
         // const collectionRef = firestore.collection('collections');
 
@@ -40,11 +40,16 @@ class ShopPage extends React.Component {
         //     updatedCollections(collectionMap);
         //     this.setState({ loading: false });
         // });
-    }
+    // }
 
-    render() {
-        const { match } = this.props;
+    // render() {
+    //     const { match } = this.props;
         // const { loading } = this.state;
+const ShopPage = ({ fetchCollectionsStart, match }) => {
+    useEffect(() => {
+        fetchCollectionsStart()
+    }, [fetchCollectionsStart])
+
         return (
             <div className='shop-page'>
                 <Route 
@@ -57,8 +62,7 @@ class ShopPage extends React.Component {
                 />
             </div>
         );
-    }
-};
+    };
 
 // const mapStateToProps = createStructuredSelector({
 //     isCollectionsLoaded: selectIsCollectionsLoaded
